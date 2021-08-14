@@ -14,15 +14,25 @@ All batch files can be found in the `\batch` directory, each file given the sema
 
 The server is written in Node.js, meaning the machine the server will be run on must have Node.js installed. There are also specific modules that are required for running the server, but those can be installed by running the `setup.bat` file which is located in the root directory of the project.
 
-## Install Node.js
+## Installing Node.js
 
 As mentioned, the server is written in Node.js, requiring its presence on the machine. You can install Node.js from their official website (for Windows, presumably) [here](https://nodejs.org/en/download/).
 
-## Install required packages
+## Installing required packages
 
 Some packages do not come preinstalled with Node.js (of which I noticed are the `ip` module and `uuid` module). You can install all packages that the server uses by running the `setup.bat` file in the root directory of the project. The `setup.bat` file will also install `nodemon`, a handy tool that automates the process of manually restarting the server upon file changes.
 
-## Initiate server
+## Cloning the repository
+
+To clone the repository to your machine, go to the directory you wish to clone it to in your terminal, and run the following command:
+
+```bat
+git clone https://github.com/msfninja/wcs.git
+```
+
+This will clone the WCS repository to your machine. You can access the WCS directory from your terminal or explorer.
+
+## Initiating server
 
 The server CLI is initiated by going to the `\server` directory in your terminal, and running the following command:
 
