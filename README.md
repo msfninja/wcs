@@ -86,7 +86,7 @@ You can press any button to perform a task and see if it works.
 
 There will be more tasks added upon each new release of WCS, but you can add your own too. So far the only way to add new tasks is to manually modify the source code. Here's how it goes:
 
-#### 1. Create a new batch file.
+#### 1. Create a new batch file
 
 Create a new batch file inside the `\batch` directory, write the script you want to be executed, and save the file. Name it how you want, although keeping things semantically clean seems to be a good practise.
 
