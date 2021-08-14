@@ -1,6 +1,6 @@
 # WCS | Windows Control Server
 
-WCS, or Windows Control Server, is a tool that allows you to perform certain tasks on your PC remotely from another device. So far the tool offers only features related to shutting or turning the machine off in a number of ways.
+WCS, or Windows Control Server, is a tool that allows you to perform certain tasks on your Windows PC remotely from another device. So far the tool offers only features related to shutting or turning the machine off in a number of ways.
 
 The tool itself represents a server that runs on the machine that you want to be able to perform certain tasks on, and a web client that you can access from any device on your LAN or worldwide if you configure your router's NAT with your ISP.
 
