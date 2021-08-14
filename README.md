@@ -189,7 +189,7 @@ Things will definitely change in future releases, but as of now, configuration f
 The `config.json` file has a property called `port`, by default on line 7:
 
 ```json
-"port": "83",
+"port": null,
 ```
 
 You can change its value to any valid port any time and save the file for changes to apply (maybe you have to restart the server as well).
@@ -200,7 +200,7 @@ This can be achieved by simply making the server think that you are using it for
 
 ```json
 "sec": {
-	"init": true
+	"init": false
 }
 ```
 
