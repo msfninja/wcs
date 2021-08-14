@@ -117,7 +117,7 @@ const
 const check = () => {
 	var arr = [
 		'/server/root/dat/uuid.asc',
-		'/server/root/dat/hash.asc',
+		'/server/root/dat/key.hash',
 		'/public/index.html',
 		'/server/root/index.html'
 	];
@@ -143,7 +143,7 @@ function Root(res) {
 	};
 	this.newcred = p => {
 		if (pinuuid()) {
-			wr(`${dir}/server/root/dat/hash.asc`,JSON.stringify({ pin: encrypt(p,(`${p}${pinuuid()}`).slice(0,32)) }));
+			wr(`${dir}/server/root/dat/key.hash`,JSON.stringify({ pin: encrypt(p,(`${p}${pinuuid()}`).slice(0,32)) }));
 		}
 		else {
 			error(`The uuid.asc file seems to be misconfigured or missing. Cannot create new credentials.\npinuuid() response:\n\n${pinuuid()}`);
@@ -263,7 +263,7 @@ const
 const
 	cred = () => {
 		try {
-			return JSON.parse(rd(`${dir}/server/root/dat/hash.asc`));
+			return JSON.parse(rd(`${dir}/server/root/dat/key.hash`));
 		}
 		catch (err) {
 			return false;

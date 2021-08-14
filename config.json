@@ -4,8 +4,8 @@
         "name_long": "Windows Control Server",
         "version": "1.0"
     },
-    "port": "83",
+    "port": null,
     "sec": {
-        "init": true
+        "init": false
     }
 }
