@@ -64,11 +64,11 @@ After providing a valid port and hitting Enter, you should see this text (where 
 
 To see if the server actually works, copy the address from the terminal and paste in your browser to visit it. If everything went fine, you should see this screen in your browser:
 
-<img src="" alt="Landing page when accessing the WCS web client" width="80%" />
+<img src="https://github.com/msfninja/wcs/raw/main/screenshots/Landing%20page%20when%20accessing%20the%20WCS%20web%20client.png" alt="Landing page when accessing the WCS web client" width="80%" />
 
 Enter the PIN-code that you provided in the terminal, and log in. You should see this screen now:
 
-<img src="" alt="Landing page after logging in with your PIN-code in the WCS web client" width="80%" />
+<img src="https://github.com/msfninja/wcs/raw/main/screenshots/Landing%20page%20after%20logging%20in%20with%20your%20PIN-code%20in%20the%20WCS%20web%20client.png" alt="Landing page after logging in with your PIN-code in the WCS web client" width="80%" />
 
 You can press any button to perform a task and see if it works.
 
@@ -88,7 +88,7 @@ echo Hello, World!
 
 The batch file:
 
-<img src="" alt="A batch file in the batch directory in WCS" width="80%" />
+<img src="https://github.com/msfninja/wcs/raw/main/screenshots/A%20batch%20file%20in%20the%20batch%20directory%20in%20WCS.png" alt="A batch file in the batch directory in WCS" width="80%" />
 
 #### 2. Modify the `\server\server.js` file
 
@@ -184,7 +184,7 @@ The `config.json` file has a property called `port`, by default on line 7:
 
 You can change its value to any valid port any time and save the file for changes to apply (or maybe you have to restart the server as well).
 
-### Setting a new PIN-coode (and port)
+### Setting a new PIN-code (and port)
 
 This can be achieved by simply making the server think that you are using it for the first time, and therefore prompting for a PIN-code, but that'll also prompt for a port afterwards. To make this happen, find the `sec` property, by default on line 8. This property contains another property called `init`:
 
