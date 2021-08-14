@@ -61,7 +61,7 @@ After providing a valid PIN-code and hitting Enter, you should see this text:
 	Port:
 ```
 
-Enter a valid port, and hit Enter. The port you entered will be written to the `config.json` file and used in the future. Wish you change the port, simply change the value in the `config.json` file which is located in the root directory of the project, save the changes and restart the server (if it doesn't restart automatically, e.g. if you initiated the `server.js` file with the `nodemon` command with the argument/flag `--ignore` set to `\*.json`).
+Enter a valid port, and hit Enter. The port you entered will be written to the `config.json` file and used in the future. Wish you change the port, simply change the value in the `config.json` file which is located in the root directory of the project, save the changes and restart the server (if it doesn't restart automatically, e.g. if you initiated the `server.js` file with the `nodemon` command with the argument/flag `--ignore` set to `*.json`).
 
 After providing a valid port and hitting Enter, you should see this text (where &lt;your_ip&gt; is your machine's IP address, i.e., where the server will be accessible from on other devices, and &lt;your_port&gt; being the port that you provided in the previous step):
 
