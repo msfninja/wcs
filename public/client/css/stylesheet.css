@@ -1,0 +1,1073 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+@font-face {
+  font-family: "FreeSans";
+  src: url("/client/media/fonts/FreeSans.otf");
+}
+html {
+  scroll-behavior: smooth;
+}
+html body {
+  margin: 0;
+}
+html body #cnt {
+  font: normal 16pt "FreeSans", sans-serif;
+  background: #32445eff;
+  color: #ffff;
+}
+html body #cnt * {
+  transition: ease 150ms;
+}
+html body #cnt .h1 {
+  font: normal 72pt "FreeSans", sans-serif;
+}
+html body #cnt .h2 {
+  font: normal 60pt "FreeSans", sans-serif;
+}
+html body #cnt .h3 {
+  font: normal 48pt "FreeSans", sans-serif;
+}
+html body #cnt .h4 {
+  font: normal 36pt "FreeSans", sans-serif;
+}
+html body #cnt .h5 {
+  font: normal 24pt "FreeSans", sans-serif;
+}
+html body #cnt .h6 {
+  font: normal 12pt "FreeSans", sans-serif;
+}
+html body #cnt .ws5 {
+  height: 5px;
+}
+html body #cnt .vws5 {
+  width: 5px;
+}
+html body #cnt .fws5 {
+  height: 5px;
+}
+html body #cnt .fvws5 {
+  width: 5px;
+}
+html body #cnt .ws10 {
+  height: 10px;
+}
+html body #cnt .vws10 {
+  width: 10px;
+}
+html body #cnt .fws10 {
+  height: 10px;
+}
+html body #cnt .fvws10 {
+  width: 10px;
+}
+html body #cnt .ws15 {
+  height: 15px;
+}
+html body #cnt .vws15 {
+  width: 15px;
+}
+html body #cnt .fws15 {
+  height: 15px;
+}
+html body #cnt .fvws15 {
+  width: 15px;
+}
+html body #cnt .ws20 {
+  height: 20px;
+}
+html body #cnt .vws20 {
+  width: 20px;
+}
+html body #cnt .fws20 {
+  height: 20px;
+}
+html body #cnt .fvws20 {
+  width: 20px;
+}
+html body #cnt .ws25 {
+  height: 25px;
+}
+html body #cnt .vws25 {
+  width: 25px;
+}
+html body #cnt .fws25 {
+  height: 25px;
+}
+html body #cnt .fvws25 {
+  width: 25px;
+}
+html body #cnt .ws30 {
+  height: 30px;
+}
+html body #cnt .vws30 {
+  width: 30px;
+}
+html body #cnt .fws30 {
+  height: 30px;
+}
+html body #cnt .fvws30 {
+  width: 30px;
+}
+html body #cnt .ws35 {
+  height: 35px;
+}
+html body #cnt .vws35 {
+  width: 35px;
+}
+html body #cnt .fws35 {
+  height: 35px;
+}
+html body #cnt .fvws35 {
+  width: 35px;
+}
+html body #cnt .ws40 {
+  height: 40px;
+}
+html body #cnt .vws40 {
+  width: 40px;
+}
+html body #cnt .fws40 {
+  height: 40px;
+}
+html body #cnt .fvws40 {
+  width: 40px;
+}
+html body #cnt .ws45 {
+  height: 45px;
+}
+html body #cnt .vws45 {
+  width: 45px;
+}
+html body #cnt .fws45 {
+  height: 45px;
+}
+html body #cnt .fvws45 {
+  width: 45px;
+}
+html body #cnt .ws50 {
+  height: 50px;
+}
+html body #cnt .vws50 {
+  width: 50px;
+}
+html body #cnt .fws50 {
+  height: 50px;
+}
+html body #cnt .fvws50 {
+  width: 50px;
+}
+html body #cnt .ws55 {
+  height: 55px;
+}
+html body #cnt .vws55 {
+  width: 55px;
+}
+html body #cnt .fws55 {
+  height: 55px;
+}
+html body #cnt .fvws55 {
+  width: 55px;
+}
+html body #cnt .ws60 {
+  height: 60px;
+}
+html body #cnt .vws60 {
+  width: 60px;
+}
+html body #cnt .fws60 {
+  height: 60px;
+}
+html body #cnt .fvws60 {
+  width: 60px;
+}
+html body #cnt .ws65 {
+  height: 65px;
+}
+html body #cnt .vws65 {
+  width: 65px;
+}
+html body #cnt .fws65 {
+  height: 65px;
+}
+html body #cnt .fvws65 {
+  width: 65px;
+}
+html body #cnt .ws70 {
+  height: 70px;
+}
+html body #cnt .vws70 {
+  width: 70px;
+}
+html body #cnt .fws70 {
+  height: 70px;
+}
+html body #cnt .fvws70 {
+  width: 70px;
+}
+html body #cnt .ws75 {
+  height: 75px;
+}
+html body #cnt .vws75 {
+  width: 75px;
+}
+html body #cnt .fws75 {
+  height: 75px;
+}
+html body #cnt .fvws75 {
+  width: 75px;
+}
+html body #cnt .ws80 {
+  height: 80px;
+}
+html body #cnt .vws80 {
+  width: 80px;
+}
+html body #cnt .fws80 {
+  height: 80px;
+}
+html body #cnt .fvws80 {
+  width: 80px;
+}
+html body #cnt .ws85 {
+  height: 85px;
+}
+html body #cnt .vws85 {
+  width: 85px;
+}
+html body #cnt .fws85 {
+  height: 85px;
+}
+html body #cnt .fvws85 {
+  width: 85px;
+}
+html body #cnt .ws90 {
+  height: 90px;
+}
+html body #cnt .vws90 {
+  width: 90px;
+}
+html body #cnt .fws90 {
+  height: 90px;
+}
+html body #cnt .fvws90 {
+  width: 90px;
+}
+html body #cnt .ws95 {
+  height: 95px;
+}
+html body #cnt .vws95 {
+  width: 95px;
+}
+html body #cnt .fws95 {
+  height: 95px;
+}
+html body #cnt .fvws95 {
+  width: 95px;
+}
+html body #cnt .ws100 {
+  height: 100px;
+}
+html body #cnt .vws100 {
+  width: 100px;
+}
+html body #cnt .fws100 {
+  height: 100px;
+}
+html body #cnt .fvws100 {
+  width: 100px;
+}
+html body #cnt .ws105 {
+  height: 105px;
+}
+html body #cnt .vws105 {
+  width: 105px;
+}
+html body #cnt .fws105 {
+  height: 105px;
+}
+html body #cnt .fvws105 {
+  width: 105px;
+}
+html body #cnt .ws110 {
+  height: 110px;
+}
+html body #cnt .vws110 {
+  width: 110px;
+}
+html body #cnt .fws110 {
+  height: 110px;
+}
+html body #cnt .fvws110 {
+  width: 110px;
+}
+html body #cnt .ws115 {
+  height: 115px;
+}
+html body #cnt .vws115 {
+  width: 115px;
+}
+html body #cnt .fws115 {
+  height: 115px;
+}
+html body #cnt .fvws115 {
+  width: 115px;
+}
+html body #cnt .ws120 {
+  height: 120px;
+}
+html body #cnt .vws120 {
+  width: 120px;
+}
+html body #cnt .fws120 {
+  height: 120px;
+}
+html body #cnt .fvws120 {
+  width: 120px;
+}
+html body #cnt .ws125 {
+  height: 125px;
+}
+html body #cnt .vws125 {
+  width: 125px;
+}
+html body #cnt .fws125 {
+  height: 125px;
+}
+html body #cnt .fvws125 {
+  width: 125px;
+}
+html body #cnt .ws130 {
+  height: 130px;
+}
+html body #cnt .vws130 {
+  width: 130px;
+}
+html body #cnt .fws130 {
+  height: 130px;
+}
+html body #cnt .fvws130 {
+  width: 130px;
+}
+html body #cnt .ws135 {
+  height: 135px;
+}
+html body #cnt .vws135 {
+  width: 135px;
+}
+html body #cnt .fws135 {
+  height: 135px;
+}
+html body #cnt .fvws135 {
+  width: 135px;
+}
+html body #cnt .ws140 {
+  height: 140px;
+}
+html body #cnt .vws140 {
+  width: 140px;
+}
+html body #cnt .fws140 {
+  height: 140px;
+}
+html body #cnt .fvws140 {
+  width: 140px;
+}
+html body #cnt .ws145 {
+  height: 145px;
+}
+html body #cnt .vws145 {
+  width: 145px;
+}
+html body #cnt .fws145 {
+  height: 145px;
+}
+html body #cnt .fvws145 {
+  width: 145px;
+}
+html body #cnt .ws150 {
+  height: 150px;
+}
+html body #cnt .vws150 {
+  width: 150px;
+}
+html body #cnt .fws150 {
+  height: 150px;
+}
+html body #cnt .fvws150 {
+  width: 150px;
+}
+html body #cnt .ws155 {
+  height: 155px;
+}
+html body #cnt .vws155 {
+  width: 155px;
+}
+html body #cnt .fws155 {
+  height: 155px;
+}
+html body #cnt .fvws155 {
+  width: 155px;
+}
+html body #cnt .ws160 {
+  height: 160px;
+}
+html body #cnt .vws160 {
+  width: 160px;
+}
+html body #cnt .fws160 {
+  height: 160px;
+}
+html body #cnt .fvws160 {
+  width: 160px;
+}
+html body #cnt .ws165 {
+  height: 165px;
+}
+html body #cnt .vws165 {
+  width: 165px;
+}
+html body #cnt .fws165 {
+  height: 165px;
+}
+html body #cnt .fvws165 {
+  width: 165px;
+}
+html body #cnt .ws170 {
+  height: 170px;
+}
+html body #cnt .vws170 {
+  width: 170px;
+}
+html body #cnt .fws170 {
+  height: 170px;
+}
+html body #cnt .fvws170 {
+  width: 170px;
+}
+html body #cnt .ws175 {
+  height: 175px;
+}
+html body #cnt .vws175 {
+  width: 175px;
+}
+html body #cnt .fws175 {
+  height: 175px;
+}
+html body #cnt .fvws175 {
+  width: 175px;
+}
+html body #cnt .ws180 {
+  height: 180px;
+}
+html body #cnt .vws180 {
+  width: 180px;
+}
+html body #cnt .fws180 {
+  height: 180px;
+}
+html body #cnt .fvws180 {
+  width: 180px;
+}
+html body #cnt .ws185 {
+  height: 185px;
+}
+html body #cnt .vws185 {
+  width: 185px;
+}
+html body #cnt .fws185 {
+  height: 185px;
+}
+html body #cnt .fvws185 {
+  width: 185px;
+}
+html body #cnt .ws190 {
+  height: 190px;
+}
+html body #cnt .vws190 {
+  width: 190px;
+}
+html body #cnt .fws190 {
+  height: 190px;
+}
+html body #cnt .fvws190 {
+  width: 190px;
+}
+html body #cnt .ws195 {
+  height: 195px;
+}
+html body #cnt .vws195 {
+  width: 195px;
+}
+html body #cnt .fws195 {
+  height: 195px;
+}
+html body #cnt .fvws195 {
+  width: 195px;
+}
+html body #cnt .ws200 {
+  height: 200px;
+}
+html body #cnt .vws200 {
+  width: 200px;
+}
+html body #cnt .fws200 {
+  height: 200px;
+}
+html body #cnt .fvws200 {
+  width: 200px;
+}
+html body #cnt .ws205 {
+  height: 205px;
+}
+html body #cnt .vws205 {
+  width: 205px;
+}
+html body #cnt .fws205 {
+  height: 205px;
+}
+html body #cnt .fvws205 {
+  width: 205px;
+}
+html body #cnt .ws210 {
+  height: 210px;
+}
+html body #cnt .vws210 {
+  width: 210px;
+}
+html body #cnt .fws210 {
+  height: 210px;
+}
+html body #cnt .fvws210 {
+  width: 210px;
+}
+html body #cnt .ws215 {
+  height: 215px;
+}
+html body #cnt .vws215 {
+  width: 215px;
+}
+html body #cnt .fws215 {
+  height: 215px;
+}
+html body #cnt .fvws215 {
+  width: 215px;
+}
+html body #cnt .ws220 {
+  height: 220px;
+}
+html body #cnt .vws220 {
+  width: 220px;
+}
+html body #cnt .fws220 {
+  height: 220px;
+}
+html body #cnt .fvws220 {
+  width: 220px;
+}
+html body #cnt .ws225 {
+  height: 225px;
+}
+html body #cnt .vws225 {
+  width: 225px;
+}
+html body #cnt .fws225 {
+  height: 225px;
+}
+html body #cnt .fvws225 {
+  width: 225px;
+}
+html body #cnt .ws230 {
+  height: 230px;
+}
+html body #cnt .vws230 {
+  width: 230px;
+}
+html body #cnt .fws230 {
+  height: 230px;
+}
+html body #cnt .fvws230 {
+  width: 230px;
+}
+html body #cnt .ws235 {
+  height: 235px;
+}
+html body #cnt .vws235 {
+  width: 235px;
+}
+html body #cnt .fws235 {
+  height: 235px;
+}
+html body #cnt .fvws235 {
+  width: 235px;
+}
+html body #cnt .ws240 {
+  height: 240px;
+}
+html body #cnt .vws240 {
+  width: 240px;
+}
+html body #cnt .fws240 {
+  height: 240px;
+}
+html body #cnt .fvws240 {
+  width: 240px;
+}
+html body #cnt .ws245 {
+  height: 245px;
+}
+html body #cnt .vws245 {
+  width: 245px;
+}
+html body #cnt .fws245 {
+  height: 245px;
+}
+html body #cnt .fvws245 {
+  width: 245px;
+}
+html body #cnt .ws250 {
+  height: 250px;
+}
+html body #cnt .vws250 {
+  width: 250px;
+}
+html body #cnt .fws250 {
+  height: 250px;
+}
+html body #cnt .fvws250 {
+  width: 250px;
+}
+html body #cnt .hr {
+  border-radius: 3px;
+  width: 90%;
+  height: 3px;
+  background: #aaaf;
+}
+html body #cnt .row-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+html body #cnt .column-around {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+html body #cnt .flexbox-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+html body #cnt .flexbox-i-around {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+html body #cnt .desktop {
+  display: initial;
+}
+html body #cnt .mobile {
+  display: none;
+}
+html body #cnt main section {
+  padding: 100px;
+}
+html body #cnt main .section-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+html body #cnt main #intro {
+  padding: 0;
+}
+html body #cnt .btn {
+  border: none;
+  border-radius: 0.875rem;
+  display: inline;
+  font-size: 16pt;
+  padding: 15px;
+  margin: 0;
+  background: #9996;
+  color: #ffff;
+  cursor: pointer;
+  min-width: 125px;
+}
+html body #cnt .btn:focus {
+  outline: none;
+  background: #999a;
+}
+html body #cnt .btn:hover {
+  background: #999a;
+}
+html body #cnt .btn .btn-ico {
+  margin-right: 15pc;
+}
+html body #cnt input, html body #cnt button {
+  border: none;
+  border-radius: 0.875rem;
+  display: inline;
+  font-size: 16pt;
+  padding: 15px;
+  margin: 0;
+  background: #9996;
+  color: #ffff;
+}
+html body #cnt input:focus, html body #cnt button:focus {
+  outline: none;
+  background: #999a;
+}
+html body #cnt button {
+  cursor: pointer;
+}
+html body #cnt #msg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  transform: translateY(-150%);
+}
+html body #cnt #msg-cnt {
+  border-radius: 1rem;
+  min-width: 500px;
+  padding: 10px;
+  background: #54667fff;
+  color: #ffff;
+  box-shadow: 0 0 10px #0003;
+}
+
+@media screen and (max-width: 950px) {
+  html body #cnt .fws5 {
+    width: 5px;
+  }
+  html body #cnt .fvws5 {
+    height: 5px;
+  }
+  html body #cnt .fws10 {
+    width: 10px;
+  }
+  html body #cnt .fvws10 {
+    height: 10px;
+  }
+  html body #cnt .fws15 {
+    width: 15px;
+  }
+  html body #cnt .fvws15 {
+    height: 15px;
+  }
+  html body #cnt .fws20 {
+    width: 20px;
+  }
+  html body #cnt .fvws20 {
+    height: 20px;
+  }
+  html body #cnt .fws25 {
+    width: 25px;
+  }
+  html body #cnt .fvws25 {
+    height: 25px;
+  }
+  html body #cnt .fws30 {
+    width: 30px;
+  }
+  html body #cnt .fvws30 {
+    height: 30px;
+  }
+  html body #cnt .fws35 {
+    width: 35px;
+  }
+  html body #cnt .fvws35 {
+    height: 35px;
+  }
+  html body #cnt .fws40 {
+    width: 40px;
+  }
+  html body #cnt .fvws40 {
+    height: 40px;
+  }
+  html body #cnt .fws45 {
+    width: 45px;
+  }
+  html body #cnt .fvws45 {
+    height: 45px;
+  }
+  html body #cnt .fws50 {
+    width: 50px;
+  }
+  html body #cnt .fvws50 {
+    height: 50px;
+  }
+  html body #cnt .fws55 {
+    width: 55px;
+  }
+  html body #cnt .fvws55 {
+    height: 55px;
+  }
+  html body #cnt .fws60 {
+    width: 60px;
+  }
+  html body #cnt .fvws60 {
+    height: 60px;
+  }
+  html body #cnt .fws65 {
+    width: 65px;
+  }
+  html body #cnt .fvws65 {
+    height: 65px;
+  }
+  html body #cnt .fws70 {
+    width: 70px;
+  }
+  html body #cnt .fvws70 {
+    height: 70px;
+  }
+  html body #cnt .fws75 {
+    width: 75px;
+  }
+  html body #cnt .fvws75 {
+    height: 75px;
+  }
+  html body #cnt .fws80 {
+    width: 80px;
+  }
+  html body #cnt .fvws80 {
+    height: 80px;
+  }
+  html body #cnt .fws85 {
+    width: 85px;
+  }
+  html body #cnt .fvws85 {
+    height: 85px;
+  }
+  html body #cnt .fws90 {
+    width: 90px;
+  }
+  html body #cnt .fvws90 {
+    height: 90px;
+  }
+  html body #cnt .fws95 {
+    width: 95px;
+  }
+  html body #cnt .fvws95 {
+    height: 95px;
+  }
+  html body #cnt .fws100 {
+    width: 100px;
+  }
+  html body #cnt .fvws100 {
+    height: 100px;
+  }
+  html body #cnt .fws105 {
+    width: 105px;
+  }
+  html body #cnt .fvws105 {
+    height: 105px;
+  }
+  html body #cnt .fws110 {
+    width: 110px;
+  }
+  html body #cnt .fvws110 {
+    height: 110px;
+  }
+  html body #cnt .fws115 {
+    width: 115px;
+  }
+  html body #cnt .fvws115 {
+    height: 115px;
+  }
+  html body #cnt .fws120 {
+    width: 120px;
+  }
+  html body #cnt .fvws120 {
+    height: 120px;
+  }
+  html body #cnt .fws125 {
+    width: 125px;
+  }
+  html body #cnt .fvws125 {
+    height: 125px;
+  }
+  html body #cnt .fws130 {
+    width: 130px;
+  }
+  html body #cnt .fvws130 {
+    height: 130px;
+  }
+  html body #cnt .fws135 {
+    width: 135px;
+  }
+  html body #cnt .fvws135 {
+    height: 135px;
+  }
+  html body #cnt .fws140 {
+    width: 140px;
+  }
+  html body #cnt .fvws140 {
+    height: 140px;
+  }
+  html body #cnt .fws145 {
+    width: 145px;
+  }
+  html body #cnt .fvws145 {
+    height: 145px;
+  }
+  html body #cnt .fws150 {
+    width: 150px;
+  }
+  html body #cnt .fvws150 {
+    height: 150px;
+  }
+  html body #cnt .fws155 {
+    width: 155px;
+  }
+  html body #cnt .fvws155 {
+    height: 155px;
+  }
+  html body #cnt .fws160 {
+    width: 160px;
+  }
+  html body #cnt .fvws160 {
+    height: 160px;
+  }
+  html body #cnt .fws165 {
+    width: 165px;
+  }
+  html body #cnt .fvws165 {
+    height: 165px;
+  }
+  html body #cnt .fws170 {
+    width: 170px;
+  }
+  html body #cnt .fvws170 {
+    height: 170px;
+  }
+  html body #cnt .fws175 {
+    width: 175px;
+  }
+  html body #cnt .fvws175 {
+    height: 175px;
+  }
+  html body #cnt .fws180 {
+    width: 180px;
+  }
+  html body #cnt .fvws180 {
+    height: 180px;
+  }
+  html body #cnt .fws185 {
+    width: 185px;
+  }
+  html body #cnt .fvws185 {
+    height: 185px;
+  }
+  html body #cnt .fws190 {
+    width: 190px;
+  }
+  html body #cnt .fvws190 {
+    height: 190px;
+  }
+  html body #cnt .fws195 {
+    width: 195px;
+  }
+  html body #cnt .fvws195 {
+    height: 195px;
+  }
+  html body #cnt .fws200 {
+    width: 200px;
+  }
+  html body #cnt .fvws200 {
+    height: 200px;
+  }
+  html body #cnt .fws205 {
+    width: 205px;
+  }
+  html body #cnt .fvws205 {
+    height: 205px;
+  }
+  html body #cnt .fws210 {
+    width: 210px;
+  }
+  html body #cnt .fvws210 {
+    height: 210px;
+  }
+  html body #cnt .fws215 {
+    width: 215px;
+  }
+  html body #cnt .fvws215 {
+    height: 215px;
+  }
+  html body #cnt .fws220 {
+    width: 220px;
+  }
+  html body #cnt .fvws220 {
+    height: 220px;
+  }
+  html body #cnt .fws225 {
+    width: 225px;
+  }
+  html body #cnt .fvws225 {
+    height: 225px;
+  }
+  html body #cnt .fws230 {
+    width: 230px;
+  }
+  html body #cnt .fvws230 {
+    height: 230px;
+  }
+  html body #cnt .fws235 {
+    width: 235px;
+  }
+  html body #cnt .fvws235 {
+    height: 235px;
+  }
+  html body #cnt .fws240 {
+    width: 240px;
+  }
+  html body #cnt .fvws240 {
+    height: 240px;
+  }
+  html body #cnt .fws245 {
+    width: 245px;
+  }
+  html body #cnt .fvws245 {
+    height: 245px;
+  }
+  html body #cnt .fws250 {
+    width: 250px;
+  }
+  html body #cnt .fvws250 {
+    height: 250px;
+  }
+  html body #cnt .desktop {
+    display: none;
+  }
+  html body #cnt .mobile {
+    display: initial;
+  }
+  html body #cnt .flexbox-around {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  html body #cnt .flexbox-i-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  html body #cnt main section {
+    padding: 25px 15px;
+  }
+  html body #cnt input {
+    width: 60vw;
+  }
+  html body #cnt #msg-cnt {
+    min-width: 90vw;
+  }
+}
+
+/*# sourceMappingURL=stylesheet.css.map */

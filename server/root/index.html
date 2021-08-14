@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		{component.meta}
+		{component.links}
+		{component.scripts}
+		<title>{app.name}</title>
+	</head>
+	<body>
+		<div id="cnt">
+			<div id="msg" class="row-around">
+				<div id="msg-cnt">msg</div>
+			</div>
+			<main>
+				<section id="intro" class="section-center">
+					<div class="h3 desktop">{app.namelong}</div>
+					<div class="h3 mobile">{app.name}</div>
+					<div class="ws50"></div>
+					<div class="column-around">
+						<div class="h5">Quick Actions</div>
+						<div class="ws50"></div>
+						<div class="flexbox-i-around">
+							<div class="flexbox-around">
+								<div onclick="lock();" title="Send lock command to your PC" class="btn"><i class="bi bi-lock"></i> Lock</div>
+								<div class="fvws25"></div>
+								<div onclick="sleep();" title="Send sleep command to your PC" class="btn"><i class="bi bi-moon"></i> Sleep</div>
+								<div class="fvws25"></div>
+								<div onclick="signout();" title="Send sign out command to your PC" class="btn"><i class="bi bi-box-arrow-right"></i> Sign out</div>
+							</div>
+							<div class="fws25"></div>
+							<div class="flexbox-around">
+								<div onclick="hibernate();" title="Send hibernate command to your PC" class="btn"><i class="bi bi-power"></i> Hibernate</div>
+								<div class="fvws25"></div>
+								<div onclick="shutdown();" title="Send shutdown command to your PC" class="btn"><i class="bi bi-power"></i> Shutdown</div>
+								<div class="fvws25"></div>
+								<div onclick="restart();" title="Send restart command to your PC" class="btn"><i class="bi bi-arrow-clockwise"></i> Restart</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="mobile"><div class="ws100"></div></div>
+				<div class="hr" style="width: 100%;"></div>
+				<div class="mobile"><div class="ws25"></div></div>
+				<section>
+					<div class="h4 desktop">{app.namelong}</div>
+					<div class="h4 mobile">{app.name}</div>
+					<div class="ws50"></div>
+					<div onclick="logout();" title="Log out of {app.name}" class="btn"><i class="bi bi-box-arrow-right"></i> Log out</div>
+				</section>
+				<div class="mobile"><div class="ws25"></div></div>
+			</main>
+		</div>
+		<script type="application/ecmascript">
+			const ajax = url => {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET',url);
+				xhr.send();
+			};
+			const
+				shutdown = () => {
+					ajax('/{token}/shutdown');
+					msg('Shutdown command sent');
+				},
+				restart = () => {
+					ajax('/{token}/restart');
+					msg('Restart command sent');
+				},
+				signout = () => {
+					ajax('/{token}/signout');
+					msg('Sign out command sent');
+				},
+				lock = () => {
+					ajax('/{token}/lock');
+					msg('Lock command sent');
+				},
+				sleep = () => {
+					ajax('/{token}/sleep');
+					msg('Sleep command sent');
+				},
+				hibernate = () => {
+					ajax('/{token}/hibernate');
+					msg('Hibernate command sent');
+				};
+			const msg = t => {
+				qs('#msg-cnt')[0].innerHTML = t;
+				qs('#msg')[0].style.transform = 'translateY(0)';
+				setTimeout(() => {
+					qs('#msg')[0].style.transform = 'translateY(-150%)';
+				},1250);
+			};
+			const logout = () => {
+				window.location.href = '/';
+			};
+		</script>
+	</body>
+</html>

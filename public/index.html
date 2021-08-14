@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		{component.meta}
+		{component.links}
+		{component.scripts}
+		<title>{app.name}</title>
+	</head>
+	<body>
+		<div id="cnt">
+			<main>
+				<section id="intro" class="section-center">
+					<div class="h3 desktop">{app.namelong}</div>
+					<div class="h3 mobile">{app.name}</div>
+					<div class="ws50"></div>
+					<div>
+						<form method="post" action="/">
+							<input style="border-radius: 1rem 0 0 1rem;" type="text" name="pin" required="true" placeholder="PIN-code" /><button style="border-radius: 0 1rem 1rem 0;" type="submit"><i class="bi bi-box-arrow-in-right"></i></button>
+						</form>
+					</div>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>
