@@ -102,7 +102,7 @@ The batch file:
 
 #### 2. Modify the `\server\server.js` file
 
-Go to the `server.js` file which is located in the `/server` directory, and find the `Root` function. If you haven't touched the file, it should at line 130. Copy/paste one of the already present methods anywhere within the `Root` function, for example this one:
+Go to the `server.js` file which is located in the `\server` directory, and find the `Root` function. If you haven't touched the file, it should be at line 130. Copy/paste one of the already present methods anywhere within the `Root` function, for example this one:
 
 ```javascript
 this.shutdown = () => {
@@ -140,9 +140,9 @@ Now save the `server.js` file.
 
 #### 3. Modify the `\root\index.html` file
 
-Now go to the `index.html` file in the `/root` directory, and go to the JavaScript script almost at the end of the file.
+Now go to the `index.html` file in the `\root` directory, and go to the JavaScript script almost at the end of the file.
 
-The script has an `ajax` function declared in the beginning. Right after it you can see a list of function declarations each responsible for making a request to the server to perform a task.
+The script has the `ajax()` function declared in the beginning. Right after it you can see a list of function declarations each responsible for making a request to the server to perform a task.
 
 Copy/paste one of the functions in the same column, or somewhere else, for example this one:
 
@@ -153,7 +153,7 @@ shutdown = () => {
 },
 ```
 
-Now, modify the copy/pasted function accordingly to what you've specified in the accepted URL in the `server.js` file in step 2. For example, like this (note, you can put whatever text you like in the `msg` function call):
+Now, modify the copy/pasted function accordingly to what you've specified in the accepted URL in the `server.js` file in step 2. For example, like this (note, you can put whatever text you like in the `msg()` function call):
 
 ```javascript
 mybatchscript = () => {
@@ -164,7 +164,7 @@ mybatchscript = () => {
 
 After this, you'd also need to add a button in the HTML to appear in the web client so you can call the function. You can do this however you want.
 
-If you need a quick way to do this, go to line 40 in the `index.html` file in the `/root` directory, insert a line break and paste the following HTML code there:
+If you need a quick way to do this, go to line 40 in the `index.html` file in the `\root` directory, insert a line break and paste the following HTML code there:
 
 ```html
 <section>
@@ -192,7 +192,7 @@ The `config.json` file has a property called `port`, by default on line 7:
 "port": "83",
 ```
 
-You can change its value to any valid port any time and save the file for changes to apply (or maybe you have to restart the server as well).
+You can change its value to any valid port any time and save the file for changes to apply (maybe you have to restart the server as well).
 
 ### Setting a new PIN-code (and port)
 
@@ -204,7 +204,7 @@ This can be achieved by simply making the server think that you are using it for
 }
 ```
 
- If its value is set to true, it won't ask for a PIN-code and a port upon initiating the server CLI. If it's set to false however, it will. Keep in mind that the server will automatically set this value to true every time you initiate the server CLI, enter a PIN-code and a port.
+ If its value is set to `true`, it won't ask for a PIN-code and a port upon initiating the server CLI. If it's set to `false` however, it will. Keep in mind that the server will automatically set this value to `true` every time you initiate the server CLI, enter a PIN-code and a port.
 
 ## Compiling the Sass code
 
