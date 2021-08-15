@@ -1,6 +1,6 @@
 # WCS | Windows Control Server
 
-WCS, or Windows Control Server, is a tool that allows you to perform certain tasks on your Windows PC remotely from another device. So far the tool offers only features related to shutting or turning the machine off in a number of ways.
+WCS, or Windows Control Server, is a tool that allows you to perform certain tasks on your Windows PC remotely from another device. So far the tool offers only features related to shutting or turning the machine off in a number of ways, accessing and modifying the file system and launching certain applications.
 
 The tool itself represents a server that runs on the machine that you want to be able to perform certain tasks on, and a web client that you can access from any device on your LAN or worldwide if you configure your router's NAT with your ISP.
 
@@ -14,13 +14,41 @@ All batch files can be found in the `\batch` directory, each file given the sema
 
 The server is written in Node.js, meaning the machine the server will be run on must have Node.js installed. There are also specific modules that are required for running the server, but those can be installed by running the `setup.bat` file which is located in the root directory of the project.
 
+<table>
+	<tr>
+		<th>Table of Contents</th>
+	</tr>
+	<tr>
+		<td>
+			<ol>
+				<li>[Installing Git](#installing-git)</li>
+				<li>[Installing Node.js](#installing-nodejs)</li>
+				<li>[Installing required modules](#installing-required-modules)</li>
+				<li>[Cloning the repository](#cloning-the-repository)</li>
+				<li>[Initiating the server](#initiating-the-server)</li>
+				<li>[Configuring the server](#configuring-the-server)</li>
+				<ol>
+					<li>[Changing the port](#changing-the-port)</li>
+					<li>[Setting a new PIN-code (and port)](#setting-a-new-pincode-and-port)</li>
+				</ol>
+				<li>[Adding new tasks](#adding-new-tasks)</li>
+				<li>[Compiling the Sass code](#compiling-the-sass-code)</li>
+			</ol>
+		</td>
+	</tr>
+</table>
+
+## Installing Git
+
+You will be needing Git to clone this repository to your machine. You can download and install Git from their official website [here](https://git-scm.com/download/win).
+
 ## Installing Node.js
 
-As mentioned, the server is written in Node.js, requiring its presence on the machine. You can install Node.js from their official website (for Windows, presumably) [here](https://nodejs.org/en/download/).
+As mentioned, the server is written in Node.js, requiring its presence on the machine. You can download and install Node.js from their official website [here](https://nodejs.org/en/download/).
 
-## Installing required packages
+## Installing required modules
 
-Some packages do not come preinstalled with Node.js (of which I noticed are the `ip` module and `uuid` module). You can install all packages that the server uses by running the `setup.bat` file in the root directory of the project. The `setup.bat` file will also install `nodemon`, a handy tool that automates the process of manually restarting the server upon file changes.
+Some modules do not come preinstalled with Node.js (of which I noticed are the `ip` and `uuid` modules). You can install all modules that the server uses by running the `setup.bat` file in the root directory of the project. The `setup.bat` file will also install `nodemon`, a handy tool that automates the process of manually restarting the server upon file changes.
 
 ## Cloning the repository
 
@@ -32,7 +60,7 @@ git clone https://github.com/msfninja/wcs.git
 
 This will clone the WCS repository to your machine. You can access the WCS directory from your terminal or explorer.
 
-## Initiating server
+## Initiating the server
 
 The server CLI is initiated by going to the `\server` directory in your terminal, and running the following command:
 
@@ -82,102 +110,6 @@ Enter the PIN-code that you provided in the terminal, and log in. You should see
 
 You can press any button to perform a task and see if it works.
 
-## Adding new tasks
-
-There will be more tasks added upon each new release of WCS, but you can add your own too. So far the only way to add new tasks is to manually modify the source code. Here's how it goes:
-
-#### 1. Create a new batch file
-
-Create a new batch file inside the `\batch` directory, write the script you want to be executed, and save the file. Name it how you want, although keeping things semantically clean seems to be a good practise.
-
-A sample batch script:
-
-```bat
-echo Hello, World!
-```
-
-The batch file:
-
-<img src="https://github.com/msfninja/wcs/raw/main/screenshots/A%20batch%20file%20in%20the%20batch%20directory%20in%20WCS.png" alt="A batch file in the batch directory in WCS" width="80%" />
-
-#### 2. Modify the `\server\server.js` file
-
-Go to the `server.js` file which is located in the `\server` directory, and find the `Root` function. If you haven't touched the file, it should be at line 130. Copy/paste one of the already present methods anywhere within the `Root` function, for example this one:
-
-```javascript
-this.shutdown = () => {
-	exec(`${dir}/server/batch/shutdown.bat`);
-};
-```
-
-Now, change the function name and the filename of the batch file inside the `exec()` function call accordingly to what you named your batch file in step 1, for example, to this:
-
-```javascript
-this.mybatchscript = () => {
-	exec(`${dir}/server/batch/mybatchscript.bat`);
-};
-```
-
-Now, go to the `else if` statement that accepts the task-specific-URLs. Assuming you have copy/pasted one method, this `else if` statement should located somewhere around line 204. This `else if` statement contains a `switch` statement, which determines what task the client wants to execute, and calls the appropriate method of the `Root` function.
-
-Copy/paste a `case` that's already present somewhere within the `switch` statement, for example this one:
-
-```javascript
-case 'shutdown':
-	system.shutdown();
-	break;
-```
-
-Now, you would need to modify the copy/pasted `case` accordingly to what our `Root` function methods are called. For example, like this:
-
-```javascript
-case 'mybatchscript':
-	system.mybatchscript();
-	break;
-```
-
-Now save the `server.js` file.
-
-#### 3. Modify the `\root\index.html` file
-
-Now go to the `index.html` file in the `\root` directory, and go to the JavaScript script almost at the end of the file.
-
-The script has the `ajax()` function declared in the beginning. Right after it you can see a list of function declarations each responsible for making a request to the server to perform a task.
-
-Copy/paste one of the functions in the same column, or somewhere else, for example this one:
-
-```javascript
-shutdown = () => {
-	ajax('/{token}/shutdown');
-	msg('Shutdown command sent');
-},
-```
-
-Now, modify the copy/pasted function accordingly to what you've specified in the accepted URL in the `server.js` file in step 2. For example, like this (note, you can put whatever text you like in the `msg()` function call):
-
-```javascript
-mybatchscript = () => {
-	ajax('/{token}/mybatchscript');
-	msg('MyBatchScript command sent');
-},
-```
-
-After this, you'd also need to add a button in the HTML to appear in the web client so you can call the function. You can do this however you want.
-
-If you need a quick way to do this, go to line 40 in the `index.html` file in the `\root` directory, insert a line break and paste the following HTML code there:
-
-```html
-<section>
-	<div class="h4">MyBatchScript</div>
-	<div class="ws50"></div>
-	<div onclick="mybatchscript();" title="Send MyBatchScript command to your PC" class="btn"><i class="bi bi-bootstrap"></i> MyBatchScript</div>
-</section>
-```
-
-Save the `index.html` file.
-
-If the server didn't restart, restart it to apply the changes. Now you know how to add as many custom tasks as you want.
-
 ## Configuring the server
 
 A few basic things of the server can be configured in the `config.json` file in the root directory of the project, such as the port the server runs on, the name of the application, and whether to ask for a new PIN-code and port every time you initiate the server CLI.
@@ -204,7 +136,40 @@ This can be achieved by simply making the server think that you are using it for
 }
 ```
 
- If its value is set to `true`, it won't ask for a PIN-code and a port upon initiating the server CLI. If it's set to `false` however, it will. Keep in mind that the server will automatically set this value to `true` every time you initiate the server CLI, enter a PIN-code and a port.
+If its value is set to `true`, it won't ask for a PIN-code and a port upon initiating the server CLI. If it's set to `false` however, it will. Keep in mind that the server will automatically set this value to `true` every time you initiate the server CLI, enter a PIN-code and a port.
+
+## Adding new tasks
+
+There will be more tasks added upon each new release of WCS, but you can add your own too. The only way to add your own task is to simply create a batch file with your script. You can put the batch file in a new directory inside the `\batch` directory to make it appear as a separate category in the control panel. There are a few guidelines/rules on how to name a directory:
+
+ - Can consist of an unlimited amount of characters
+ - Can start with and contain any alphanumerical character
+ - Cannot contain non-alphanumerical characters
+ - Use a dash (`-`) for spaces (whitespace characters will be ignored)
+ - Text case will be ignored, the server will make every first character of a word (words are separated with a dash) upper case and all other characters lower case
+
+Create a new batch file inside the `\batch\<your_directory>` directory, write the script you want to be executed, and save the file. A few guidelines/rules on how to name a batch file:
+
+ - Can consist of an unlimited amount of characters
+ - Can start with and contain any alphanumerical character
+ - Cannot contain non-alphanumerical characters
+ - Text case will be ignored, the server will make the first character upper case, and the rest lower case).
+
+Depending on how you name the file, the name will appear in the control panel.
+
+A sample batch script:
+
+```bat
+echo Hello, World!
+```
+
+Saved batch file in explorer:
+
+<img src="https://github.com/msfninja/wcs/raw/main/screenshots/A%20batch%20file%20in%20the%20batch%20directory%20in%20WCS%20in%20explorer.png" alt="A batch file in the batch directory in WCS in explorer" width="80%" />
+
+That's it.
+
+The button will appear in the web client under the category what you named the directory the batch file is in to in the `\batch` directory.
 
 ## Compiling the Sass code
 

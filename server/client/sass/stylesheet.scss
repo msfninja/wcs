@@ -43,6 +43,10 @@ html {
 				transition: ease 150ms;
 			}
 
+			.nowrap {
+				white-space: nowrap;
+			}
+
 			@for $i from 1 through 6 {
 				$j: (7 - $i) * 12;
 
@@ -137,6 +141,7 @@ html {
 
 				cursor: pointer;
 				min-width: 125px;
+				margin: 10px;
 
 				&:hover {
 					background: #999a;

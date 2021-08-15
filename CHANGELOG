@@ -1,3 +1,28 @@
-Release v0.0.0-alpha 2021-09-14 msfninja <msfninja@airmail.cc>
+Release v0.0.0 2021-09-15 msfninja <msfninja@airmail.cc>
+
+	Note:
+	Several general fixes are introduced, mainly regarding the documentation and the README.md file. The server.js file's source code had been partly minified and small improvements have been introduced as well. The web client has also met new features and improvements.
+
+	Added:
+	 * New features/tasks were added to the web client
+	   - Ability to launch a custom batch script
+	   - Ability to launch applications
+	   - Ability to modify file system
+	   - Ability to retrieve files from file system
+
+	Changed:
+	 * The /server/server.js file has been modified
+	 * The /server/root/index.html file has been modified
+	 * The /README.md file has been modified
+	 * The /setup.bat file has been modified
+	 * The "A batch file in the batch directory in WCS in explorer.png" screenshot has been cropped 1 pixel from both horizontal sides
+
+	Fixed:
+	 * Function names and line numbers were corrected in the README.md file
+
+	Removed:
+
+Pre-release v0.0.0-alpha 2021-09-14 msfninja <msfninja@airmail.cc>
 	
-	Note: Rpject initiated.
+	Note:
+	Project initiated.

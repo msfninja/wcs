@@ -5,17 +5,18 @@ const
 	fs = require('fs'),
 	qs = require('querystring'),
 	ip = require('ip'),
+	colors = require('colors'),
 	{ exec } = require('child_process'),
+	crypto = require('crypto'),
+	{
+		v1: uuidv1,
+		v4: uuidv4
+	} = require('uuid'),
 	readline = require('readline'),
 	rl = readline.createInterface({
 		input: process.stdin,
 		output: process.stdout
-	}),
-	crypto = require('crypto'),
-	{
-		v1: uuidv1,
-		v4: uuidv4,
-	} = require('uuid');
+	});
 
 const
 	algorithm = 'aes-256-ctr',
@@ -40,42 +41,42 @@ const
 
 const config = JSON.parse(rd(`${dir}/config.json`));
 
-const
-	cli = () => {
-		let root = new Root();
-		clear();
-		if (!root.exists()) {
-			log(`Welcome to ${config.app.name}. This appears to be your first time using ${config.app.name}.\nProvide a PIN-code to protect the control panel (4 to 8 digits).\n`);
-			rl.question('\tPIN-code: ',pin => {
-				if (!isNaN(pin) && pin.split('').length >= 4 && pin.split('').length <= 8) {
-					root.newcred(pin);
-					clear();
-					log(`Enter a port ${config.app.name} will run on (a number from 0 to 64738, use 80 for no port).\n`);
-					rl.question('\tPort: ',port => {
-						if (!isNaN(port) && parseInt(port) >= 0 && parseInt(port) <= 64738) {
-							config.port = port;
-							config.sec.init = true;
-							wr(`${dir}/config.json`,JSON.stringify(config,null,4));
-							start(port);
-							rl.close();
-						}
-						else {
-							log('Invalid port.'); rl.close(); process.exit();
-						}
-					});
-				}
-				else {
-					log('Invalid PIN.'); rl.close(); process.exit();
-				}
-			});
-		}
-		else {
-			start(config.port);
-		}
-	};
+const cli = () => {
+	let root = new Root(); clear();
+	if (!root.exists()) {
+		log(`Welcome to ${config.app.name}. This appears to be your first time using ${config.app.name}.\nProvide a PIN-code to protect the control panel (4 to 8 digits).\n`);
+		rl.question('\tPIN-code: ',pin => {
+			if (!isNaN(pin) && pin.split('').length >= 4 && pin.split('').length <= 8) {
+				root.newcred(pin);
+				clear();
+				log(`Enter a port ${config.app.name} will run on (a number from 0 to 64738, use 80 for no port).\n`);
+				rl.question('\tPort: ',port => {
+					if (!isNaN(port) && parseInt(port) >= 0 && parseInt(port) <= 64738) {
+						config.port = port;
+						config.sec.init = true;
+						wr(`${dir}/config.json`,JSON.stringify(config,null,4));
+						start(port);
+						rl.close();
+					}
+					else {
+						log('Invalid port.');
+						rl.close();
+						process.exit();
+					}
+				});
+			}
+			else {
+				log('Invalid PIN.');
+				rl.close();
+				process.exit();
+			}
+		});
+	}
+	else start(config.port);
+};
 
 const
-	term = (res,s,h,c) => {
+	t = (res,s,h,c) => {
 		res.writeHead(s,h);
 		if (c) res.write(c);
 		res.end();
@@ -86,20 +87,17 @@ const
 			html = '';
 		if (compare(['r','a'],modes,1)) {
 			html = rd(h).replace(/\{component\.meta\}/g,rd(`${dir}/server/client/component/meta.html`)).replace(/\{component\.links\}/g,rd(`${dir}/server/client/component/links.html`)).replace(/\{component\.scripts\}/g,rd(`${dir}/server/client/component/scripts.html`));
-
 			if (modes.includes('a')) {
+				html = html.replace(/\{categories\}/g,gethtml());
 				html = html.replace(/\{token\}/g,token);
 			}
-
 			html = html.replace(/\{app\.name\}/g,config.app.name).replace(/\{app\.namelong\}/g,config.app.name_long);
 		}
 		return html;
 	},
 	compare = (a,b,n) => {
 		var arr = [];
-		for (var i = a.length - 1; i >= 0; i--) for (var j = b.length - 1; j >= 0; j--) {
-			if (a[i] === b[j]) arr.push(a);
-		}
+		for (var i = a.length - 1; i >= 0; i--) for (var j = b.length - 1; j >= 0; j--) if (a[i] === b[j]) arr.push(a);
 		if (arr.length >= n) return true;
 		return false;
 	},
@@ -112,25 +110,98 @@ const
 			obj[parts.shift().trim()] = decodeURI(parts.join('='));
 		});
 		return obj;
+	},
+	check = () => {
+		var arr = [
+			'/server/root/dat/uuid.asc',
+			'/server/root/dat/key.hash',
+			'/public/index.html',
+			'/server/root/index.html'
+		];
+		arr.forEach(e => { if (!ex(`${dir}${e}`)) return false; });
+		return true;
 	};
 
-const check = () => {
-	var arr = [
-		'/server/root/dat/uuid.asc',
-		'/server/root/dat/key.hash',
-		'/public/index.html',
-		'/server/root/index.html'
-	];
-	arr.forEach(e => {
-		if (!ex(`${dir}${e}`)) return false;
+const
+	gettree = h => { return fs.readdirSync(h); },
+	getcom = p => {
+		var arr = [];
+		const getlist = p => {
+			gettree(p).forEach(e => {
+				if (fs.lstatSync(path.join(p,e)).isDirectory()) getlist(path.join(p,e));
+				else arr.push({
+					name: e.split('.')[0],
+					path: path.join(p,e)
+				});
+			});
+		};
+		getlist(p);
+		return arr;
+	},
+	getcat = p => {
+		var arr = [];
+		gettree(p).forEach(e => { if (fs.lstatSync(path.join(p,e)).isDirectory()) arr.push(e); });
+		return arr;
+	},
+	execute = (a,b) => {
+		var obj = getcom(`${dir}/server/batch`).find(e => e.name === a);
+		if (obj) {
+			if (b) exec(`${obj.path} ${decodeURIComponent(b)}`);
+			else exec(obj.path);
+		}
+	};
+
+const gethtml = () => {
+	var html = '';
+	getcat(`${dir}/server/batch`).forEach(cat => {
+		html += `
+			<section>
+				<div class="h4">${formatcat(cat)}</div>
+				<div class="ws50"></div>
+				<div class="row-around">
+		`;
+		getcom(`${dir}/server/batch`).forEach(com => {
+			if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === 'file-system') {
+				html += `
+					<script type="application/ecmascript" defer="defer">
+						const f${com.name} = () => {
+							var c = prompt('${com.name}: Enter a pathname');
+							if (c) ajax(\`/{token}/${com.name}/\${encodeURIComponent(c)}\`);
+						};
+					</script>
+					<div title="Send ${com.name} command to your PC" onclick="f${com.name}();" class="btn">
+						<div>${com.name}</div>
+					</div>
+				`;
+			}
+			else if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === cat) {
+				html += `
+					<div title="Send ${com.name} command to your PC" onclick="ajax('/{token}/${com.name}'); msg('${formatcom(com.name)} command sent');" class="btn">
+						<div>${formatcom(com.name)}</div>
+					</div>
+				`;
+			}
+		});
+		html += `
+				</div>
+			</section>
+		`;
 	});
-	return true;
+	return html;
 };
+
+const
+	formatcat = str => {
+		var arr = [];
+		str.split('-').forEach(e => { arr.push(e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()); });
+		return arr.join(' ');
+	},
+	formatcom = str => { return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); };
 
 function Root(res) {
 	this.access = c => {
-		if (c) term(res,200,{'Content-Type':'text/html'},render(res,`${dir}/server/root/index.html`,'ra'));
-		else term(res,200,{'Content-Type':'text/html'},render(res,`${dir}/public/index.html`,'r'));
+		if (c) t(res,200,{'Content-Type':'text/html'},render(res,`${dir}/server/root/index.html`,'ra'));
+		else t(res,200,{'Content-Type':'text/html'},render(res,`${dir}/public/index.html`,'r'));
 	}
 	this.exists = () => {
 		return (config.sec.init && rd(`${dir}/server/root/dat/uuid.asc`).split('').length === 32);
@@ -142,33 +213,8 @@ function Root(res) {
 		}
 	};
 	this.newcred = p => {
-		if (pinuuid()) {
-			wr(`${dir}/server/root/dat/key.hash`,JSON.stringify({ pin: encrypt(p,(`${p}${pinuuid()}`).slice(0,32)) }));
-		}
-		else {
-			error(`The uuid.asc file seems to be misconfigured or missing. Cannot create new credentials.\npinuuid() response:\n\n${pinuuid()}`);
-		}
-	};
-}
-
-function System() {
-	this.shutdown = () => {
-		exec(`${dir}/server/batch/shutdown.bat`);
-	};
-	this.restart = () => {
-		exec(`${dir}/server/batch/restart.bat`);
-	};
-	this.signout = () => {
-		exec(`${dir}/server/batch/signout.bat`);
-	};
-	this.lock = () => {
-		exec(`${dir}/server/batch/lock.bat`);
-	};
-	this.sleep = () => {
-		exec(`${dir}/server/batch/sleep.bat`);
-	};
-	this.hibernate = () => {
-		exec(`${dir}/server/batch/hibernate.bat`);
+		if (pinuuid()) wr(`${dir}/server/root/dat/key.hash`,JSON.stringify({ pin: encrypt(p,(`${p}${pinuuid()}`).slice(0,32)) }));
+		else error(`The uuid.asc file seems to be misconfigured or missing. Cannot create new credentials.\npinuuid() response:\n\n${pinuuid()}`);
 	};
 }
 
@@ -176,14 +222,10 @@ const start = port => {
 	http.createServer((req,res) => {
 		var
 			q = url.parse(req.url,true),
-			p = q.pathname;
-
-		var cookie = cookies(req);
-
+			p = q.pathname,
+			cookie = cookies(req);
 		let
-			root = new Root(res),
-			system = new System();
-
+			root = new Root(res);
 		if (['/'].includes(p)) {
 			if (req.method === 'POST') {
 				let body;
@@ -194,53 +236,23 @@ const start = port => {
 					else root.access(false);
 				});
 			}
-			else {
-				term(res,200,{'Content-Type':'text/html'},render(res,`${dir}/public/index.html`,'r'));
-			}
+			else t(res,200,{'Content-Type':'text/html'},render(res,`${dir}/public/index.html`,'r'));
 		}
-		else if ([token].includes(p.split('/')[1])) {
-			var action = p.split('/')[2];
-			
-			switch (action) {
-				case 'shutdown':
-					system.shutdown();
-					break;
-
-				case 'restart':
-					system.restart();
-					break;
-
-				case 'signout':
-					system.signout();
-					break;
-
-				case 'lock':
-					system.lock();
-					break;
-
-				case 'sleep':
-					system.sleep();
-					break;
-
-				case 'hibernate':
-					system.hibernate();
-					break;
-			}
-		}
+		else if ([token].includes(p.split('/')[1])) execute(p.split('/')[2],p.split('/')[3]);
 		else {
 			const h = path.resolve(dir,p.replace(/^\/*/,`${dir}/public/`));
 			if (ex(h)) {
 				fs.readFile(h,(err,dat) => {
-					if (err) term(res,404,{'Content-Type':'text/html'},render(res,`${__dirname}/client/err/404.html`,'r'));
+					if (err) t(res,404,{'Content-Type':'text/html'},render(res,`${__dirname}/client/err/404.html`,'r'));
 					res.statusCode = 200;
 					return res.end(dat);
 				});
 			}
-			else term(res,404,{'Content-Type':'text/html'},render(res,`${__dirname}/client/err/404.html`,'r'));
+			else t(res,404,{'Content-Type':'text/html'},render(res,`${__dirname}/client/err/404.html`,'r'));
 		}
 	}).listen(port);
 	clear();
-	log(`${config.app.name} is running at the following address:\nhttp://${ip.address()}${(port == 80) ? '' : (':' + port)}\n\nPress ctrl+c any time to shut the server down.`);
+	log(`${config.app.name} is running at the following address:\nhttp://${ip.address()}${(port == 80) ? '' : (':' + port)}\n\nPress ^C any time to shut the server down.`);
 };
 
 const
@@ -262,12 +274,8 @@ const
 
 const
 	cred = () => {
-		try {
-			return JSON.parse(rd(`${dir}/server/root/dat/key.hash`));
-		}
-		catch (err) {
-			return false;
-		}
+		try { return JSON.parse(rd(`${dir}/server/root/dat/key.hash`)); }
+		catch (err) { return false; }
 	},
 	pinuuid = () => {
 		try {
@@ -280,30 +288,19 @@ const
 				return key;
 			}
 		}
-		catch (err) {
-			return false;
-		}
+		catch (err) { return false; }
 	};
 
-const
-	getuuid = n => {
-		var str = '';
-		for (var i = 0; i < n; i++) {
-			str += uuidv4().toString().replace(/\-/g,'');
-		}
-		return str;
-	};
+const getuuid = n => {
+	var str = '';
+	for (var i = 0; i < n; i++) str += uuidv4().toString().replace(/\-/g,'');
+	return str;
+};
 
 let token = getuuid(3);
 
 if(check()) {
-	try {
-		cli();
-	}
-	catch (err) {
-		error(`Failed to initiate the commandline interface with the following error:\n\n${err}`);
-	}
+	try { cli(); }
+	catch (err) { error(`Failed to initiate the commandline interface with the following error:\n\n${err}`); }
 }
-else {
-	error(`It appears that crucial files are missing. Cannot initiate server.\n\nTry reinstalling ${config.app.name} or contacting the creator for help.`);
-}
+else error(`It appears that crucial files are missing. Cannot initiate server.\n\nTry reinstalling ${config.app.name} or contacting the creator for help.`);

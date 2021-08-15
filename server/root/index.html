@@ -21,65 +21,43 @@
 						<div class="ws50"></div>
 						<div class="flexbox-i-around">
 							<div class="flexbox-around">
-								<div onclick="lock();" title="Send lock command to your PC" class="btn"><i class="bi bi-lock"></i> Lock</div>
-								<div class="fvws25"></div>
-								<div onclick="sleep();" title="Send sleep command to your PC" class="btn"><i class="bi bi-moon"></i> Sleep</div>
-								<div class="fvws25"></div>
-								<div onclick="signout();" title="Send sign out command to your PC" class="btn"><i class="bi bi-box-arrow-right"></i> Sign out</div>
+								<div title="Send lock command to your PC" onclick="ajax('/{token}/lock'); msg('Lock command sent');" class="btn"><i class="bi bi-lock"></i> Lock</div>
+								<div class="fvws20"></div>
+								<div title="Send sleep command to your PC" onclick="ajax('/{token}/sleep'); msg('Sleep command sent');" class="btn"><i class="bi bi-moon"></i> Sleep</div>
+								<div class="fvws20"></div>
+								<div title="Send sign out command to your PC" onclick="ajax('/{token}/signout'); msg('Sign out command sent');" class="btn"><i class="bi bi-box-arrow-right"></i> Sign out</div>
 							</div>
-							<div class="fws25"></div>
+							<div class="fws20"></div>
 							<div class="flexbox-around">
-								<div onclick="hibernate();" title="Send hibernate command to your PC" class="btn"><i class="bi bi-power"></i> Hibernate</div>
-								<div class="fvws25"></div>
-								<div onclick="shutdown();" title="Send shutdown command to your PC" class="btn"><i class="bi bi-power"></i> Shutdown</div>
-								<div class="fvws25"></div>
-								<div onclick="restart();" title="Send restart command to your PC" class="btn"><i class="bi bi-arrow-clockwise"></i> Restart</div>
+								<div title="Send hibernate command to your PC" onclick="ajax('/{token}/hibernate'); msg('Hibernate command sent');" class="btn"><i class="bi bi-power"></i> Hibernate</div>
+								<div class="fvws20"></div>
+								<div title="Send shutdown command to your PC" onclick="ajax('/{token}/shutdown'); msg('Shutdown command sent');" class="btn"><i class="bi bi-power"></i> Shutdown</div>
+								<div class="fvws20"></div>
+								<div title="Send restart command to your PC" onclick="ajax('/{token}/restart'); msg('Restart command sent');" class="btn"><i class="bi bi-arrow-clockwise"></i> Restart</div>
 							</div>
 						</div>
 					</div>
 				</section>
-				<div class="mobile"><div class="ws100"></div></div>
-				<div class="hr" style="width: 100%;"></div>
-				<div class="mobile"><div class="ws25"></div></div>
+				{categories}
 				<section>
 					<div class="h4 desktop">{app.namelong}</div>
 					<div class="h4 mobile">{app.name}</div>
 					<div class="ws50"></div>
-					<div onclick="logout();" title="Log out of {app.name}" class="btn"><i class="bi bi-box-arrow-right"></i> Log out</div>
+					<div onclick="window.location.href = '/';" title="Log out of {app.name}" class="btn"><i class="bi bi-box-arrow-right"></i> Log out</div>
 				</section>
 				<div class="mobile"><div class="ws25"></div></div>
 			</main>
 		</div>
-		<script type="application/ecmascript">
+		<script type="application/ecmascript" defer="defer">
 			const ajax = url => {
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET',url);
+				xhr.open('POST',url);
 				xhr.send();
 			};
 			const
-				shutdown = () => {
-					ajax('/{token}/shutdown');
-					msg('Shutdown command sent');
-				},
-				restart = () => {
-					ajax('/{token}/restart');
-					msg('Restart command sent');
-				},
-				signout = () => {
-					ajax('/{token}/signout');
-					msg('Sign out command sent');
-				},
-				lock = () => {
-					ajax('/{token}/lock');
-					msg('Lock command sent');
-				},
-				sleep = () => {
-					ajax('/{token}/sleep');
-					msg('Sleep command sent');
-				},
-				hibernate = () => {
-					ajax('/{token}/hibernate');
-					msg('Hibernate command sent');
+				mkdir = p => {
+					var c = prompt('Enter the path of the directory');
+					ajax(`{token}/mkdir/${encodeURIComponent(c)}`);
 				};
 			const msg = t => {
 				qs('#msg-cnt')[0].innerHTML = t;
@@ -87,9 +65,6 @@
 				setTimeout(() => {
 					qs('#msg')[0].style.transform = 'translateY(-150%)';
 				},1250);
-			};
-			const logout = () => {
-				window.location.href = '/';
 			};
 		</script>
 	</body>
