@@ -29,7 +29,7 @@ The server is written in Node.js, meaning the machine the server will be run on 
 				<li><a href="#configuring-the-server">Configuring the server</a></li>
 				<ol>
 					<li><a href="#changing-the-port">Changing the port</a></li>
-					<li><a href="#setting-a-new-pincode-and-port">Setting a new PIN-code (and port)</a></li>
+					<li><a href="#setting-a-new-pin-code-and-port">Setting a new PIN-code (and port)</a></li>
 				</ol>
 				<li><a href="#adding-new-tasks">Adding new tasks</a></li>
 				<li><a href="#compiling-the-sass-code">Compiling the Sass code</a></li>
