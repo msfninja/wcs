@@ -22,17 +22,17 @@ The server is written in Node.js, meaning the machine the server will be run on 
 		<td>
 			<ol>
 				<li><a href="#installing-git">Installing Git</a></li>
-				<li>[Installing Node.js](#installing-nodejs)</li>
-				<li>[Installing required modules](#installing-required-modules)</li>
-				<li>[Cloning the repository](#cloning-the-repository)</li>
-				<li>[Initiating the server](#initiating-the-server)</li>
-				<li>[Configuring the server](#configuring-the-server)</li>
+				<li><a href="#installing-nodejs">Installing Node.js</a></li>
+				<li><a href="#installing-required-modules">Installing required modules</a></li>
+				<li><a href="#cloning-the-repository">Cloning the repository</a></li>
+				<li><a href="#initiating-the-server">Initiating the server</a></li>
+				<li><a href="#configuring-the-server">Configuring the server</a></li>
 				<ol>
-					<li>[Changing the port](#changing-the-port)</li>
-					<li>[Setting a new PIN-code (and port)](#setting-a-new-pincode-and-port)</li>
+					<li><a href="#changing-the-port">Changing the port</a></li>
+					<li><a href="#setting-a-new-pincode-and-port">Setting a new PIN-code (and port)</a></li>
 				</ol>
-				<li>[Adding new tasks](#adding-new-tasks)</li>
-				<li>[Compiling the Sass code](#compiling-the-sass-code)</li>
+				<li><a href="#adding-new-tasks">Adding new tasks</a></li>
+				<li><a href="#compiling-the-sass-code">Compiling the Sass code</a></li>
 			</ol>
 		</td>
 	</tr>
