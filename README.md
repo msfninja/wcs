@@ -21,7 +21,7 @@ The server is written in Node.js, meaning the machine the server will be run on 
 	<tr>
 		<td>
 			<ol>
-				<li>[Installing Git](#installing-git)</li>
+				<li><a href="#installing-git">Installing Git</a></li>
 				<li>[Installing Node.js](#installing-nodejs)</li>
 				<li>[Installing required modules](#installing-required-modules)</li>
 				<li>[Cloning the repository](#cloning-the-repository)</li>
