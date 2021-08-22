@@ -107,7 +107,7 @@ const
 			rc = r.headers.cookie;
 		rc && rc.split(';').forEach(e => {
 			var parts = e.split('=');
-			obj[parts.shift().trim()] = decodeURI(parts.join('='));
+			obj[parts.shift().trim()] = decodeURIComponent(parts.join('='));
 		});
 		return obj;
 	},
@@ -146,8 +146,10 @@ const
 	execute = (a,b) => {
 		var obj = getcom(`${dir}/server/batch`).find(e => e.name === a);
 		if (obj) {
-			if (b) exec(`${obj.path} ${decodeURIComponent(b)}`);
-			else exec(obj.path);
+			var str = obj.path
+			if (b) str += ` ${decodeURIComponent(b)}`;
+			else if (c) str += ` ${decodeURIComponent(c)}`;
+			exec(str);
 		}
 	};
 
@@ -161,7 +163,7 @@ const gethtml = () => {
 				<div class="row-around">
 		`;
 		getcom(`${dir}/server/batch`).forEach(com => {
-			if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === 'file-system') {
+			if (cat === 'file-system' && com.path.split(path.sep)[com.path.split(path.sep).length - 2] === 'file-system') {
 				html += `
 					<script type="application/ecmascript" defer="defer">
 						const f${com.name} = () => {
@@ -174,12 +176,14 @@ const gethtml = () => {
 					</div>
 				`;
 			}
-			else if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === cat) {
-				html += `
-					<div title="Send ${com.name} command to your PC" onclick="ajax('/{token}/${com.name}'); msg('${formatcom(com.name)} command sent');" class="btn">
-						<div>${formatcom(com.name)}</div>
-					</div>
-				`;
+			else {
+				if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === cat) {
+					html += `
+						<div title="Send ${com.name} command to your PC" onclick="ajax('/{token}/${com.name}'); msg('${formatcom(com.name)} command sent');" class="btn">
+							<div>${formatcom(com.name)}</div>
+						</div>
+					`;
+				}
 			}
 		});
 		html += `
