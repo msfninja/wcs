@@ -132,7 +132,7 @@ This can be achieved by simply making the server think that you are using it for
 
 ```json
 "sec": {
-	"init": false
+    "init": false
 }
 ```
 
