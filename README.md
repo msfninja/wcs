@@ -10,7 +10,7 @@ The web client control panel has a set of buttons each designated to perform a s
 
 Upon receiving a request to the task-specific-URL, the server will execute a batch file containing the relevant commands for the task.
 
-All batch files can be found in the `\batch` directory, each file given the semantically relevant name.
+All batch files can be found in the `server\batch` directory, each file given the semantically relevant name.
 
 The server is written in Node.js, meaning the machine the server will be run on must have Node.js installed. There are also specific modules that are required for running the server, but those can be installed by running the `setup.cmd` file which is located in the root directory of the project.
 
