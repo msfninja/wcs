@@ -1,2 +1,1 @@
-const
-	qs = e => { return document.querySelectorAll(e); };
+// const qs = e => { return document.querySelectorAll(e); };

@@ -8,8 +8,16 @@
 	</head>
 	<body>
 		<div id="cnt">
-			<div id="msg" class="row-around">
-				<div id="msg-cnt">msg</div>
+			<div id="notif">
+				<div id="n-cnt">
+					<div class="row-between-start">
+						<div id="n-title"></div>
+						<div title="Close notification" id="n-close">
+							<i class="bi bi-x"></i>
+						</div>
+					</div>
+					<div id="n-body"></div>
+				</div>
 			</div>
 			<main>
 				<section id="intro" class="section-center">
@@ -21,19 +29,19 @@
 						<div class="ws50"></div>
 						<div class="flexbox-i-around">
 							<div class="flexbox-around">
-								<div title="Send lock command to your PC" onclick="ajax('/{token}/lock'); msg('Lock command sent');" class="btn"><i class="bi bi-lock"></i> Lock</div>
+								<div title="Send lock command to your PC" onclick="ajax('/{token}/lock'); notif(true,'Command','Lock command sent');" class="btn"><i class="bi bi-lock"></i> Lock</div>
 								<div class="fvws20"></div>
-								<div title="Send sleep command to your PC" onclick="ajax('/{token}/sleep'); msg('Sleep command sent');" class="btn"><i class="bi bi-moon"></i> Sleep</div>
+								<div title="Send sleep command to your PC" onclick="ajax('/{token}/sleep'); notif(true,'Command','Sleep command sent');" class="btn"><i class="bi bi-moon"></i> Sleep</div>
 								<div class="fvws20"></div>
-								<div title="Send sign out command to your PC" onclick="ajax('/{token}/signout'); msg('Sign out command sent');" class="btn"><i class="bi bi-box-arrow-right"></i> Sign out</div>
+								<div title="Send sign out command to your PC" onclick="ajax('/{token}/signout'); notif(true,'Command','Sign out command sent');" class="btn"><i class="bi bi-box-arrow-right"></i> Sign out</div>
 							</div>
 							<div class="fws20"></div>
 							<div class="flexbox-around">
-								<div title="Send hibernate command to your PC" onclick="ajax('/{token}/hibernate'); msg('Hibernate command sent');" class="btn"><i class="bi bi-power"></i> Hibernate</div>
+								<div title="Send hibernate command to your PC" onclick="ajax('/{token}/hibernate'); notif(true,'Command','Hibernate command sent');" class="btn"><i class="bi bi-power"></i> Hibernate</div>
 								<div class="fvws20"></div>
-								<div title="Send shutdown command to your PC" onclick="ajax('/{token}/shutdown'); msg('Shutdown command sent');" class="btn"><i class="bi bi-power"></i> Shutdown</div>
+								<div title="Send shutdown command to your PC" onclick="ajax('/{token}/shutdown'); notif(true,'Command','Shutdown command sent');" class="btn"><i class="bi bi-power"></i> Shutdown</div>
 								<div class="fvws20"></div>
-								<div title="Send restart command to your PC" onclick="ajax('/{token}/restart'); msg('Restart command sent');" class="btn"><i class="bi bi-arrow-clockwise"></i> Restart</div>
+								<div title="Send restart command to your PC" onclick="ajax('/{token}/restart'); notif(true,'Command','Restart command sent');" class="btn"><i class="bi bi-arrow-clockwise"></i> Restart</div>
 							</div>
 						</div>
 					</div>
@@ -43,7 +51,7 @@
 					<div class="h4 desktop">{app.namelong}</div>
 					<div class="h4 mobile">{app.name}</div>
 					<div class="ws50"></div>
-					<div class="row-around">
+					<div class="scrollbox-h">
 						<div onclick="window.location.href = '/';" title="Log out of {app.name}" class="btn"><i class="bi bi-box-arrow-right"></i> Log out</div>
 					</div>
 				</section>
@@ -51,23 +59,22 @@
 			</main>
 		</div>
 		<script type="application/ecmascript" defer="defer">
+			const qs = e => { return document.querySelectorAll(e); };
 			const ajax = url => {
 				var xhr = new XMLHttpRequest();
 				xhr.open('POST',url);
 				xhr.send();
 			};
-			const
-				mkdir = p => {
-					var c = prompt('Enter the path of the directory');
-					ajax(`{token}/mkdir/${encodeURIComponent(c)}`);
-				};
-			const msg = t => {
-				qs('#msg-cnt')[0].innerHTML = t;
-				qs('#msg')[0].style.transform = 'translateY(0)';
-				setTimeout(() => {
-					qs('#msg')[0].style.transform = 'translateY(-150%)';
-				},1250);
+			const notif = (c,t,b) => {
+				if (c) {
+					qs('#n-title')[0].innerHTML = t;
+					qs('#n-body')[0].innerHTML = b;
+					qs('#notif')[0].style.transform = 'translate(0,0)';
+				}
+				else qs('#notif')[0].style.transform = 'translate(0,-100%)';
 			};
+			qs('#n-cnt')[0].addEventListener('mouseleave',() => { return notif(false); });
+			qs('#n-close')[0].addEventListener('click',() => { return notif(false); });
 		</script>
 	</body>
 </html>

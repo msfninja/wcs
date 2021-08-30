@@ -12,11 +12,13 @@ Upon receiving a request to the task-specific-URL, the server will execute a bat
 
 All batch files can be found in the `\batch` directory, each file given the semantically relevant name.
 
-The server is written in Node.js, meaning the machine the server will be run on must have Node.js installed. There are also specific modules that are required for running the server, but those can be installed by running the `setup.bat` file which is located in the root directory of the project.
+The server is written in Node.js, meaning the machine the server will be run on must have Node.js installed. There are also specific modules that are required for running the server, but those can be installed by running the `setup.cmd` file which is located in the root directory of the project.
 
 <table>
 	<tr>
-		<th>Table of Contents</th>
+		<th>
+			<span>Table of Contents</span>
+		</th>
 	</tr>
 	<tr>
 		<td>
@@ -48,7 +50,7 @@ As mentioned, the server is written in Node.js, requiring its presence on the ma
 
 ## Installing required modules
 
-Some modules do not come preinstalled with Node.js (of which I noticed are the `ip` and `uuid` modules). You can install all modules that the server uses by running the `setup.bat` file in the root directory of the project. The `setup.bat` file will also install `nodemon`, a handy tool that automates the process of manually restarting the server upon file changes.
+Some modules do not come preinstalled with Node.js (of which I noticed are the `ip` and `uuid` modules). You can install all modules that the server uses by running the `setup.cmd` file in the root directory of the project. The `setup.cmd` file will also install `nodemon`, a handy tool that automates the process of manually restarting the server upon file changes. It will also install `sass`, the style sheets that WCS uses. You technically don't need Sass on your machine if you don't plan on modifying the `server\client\sass\stylesheet.scss` file to you preferences. Otherwise you can find instructions on compiling the SCSS code into native CSS code at the end of this readme file.
 
 ## Cloning the repository
 
@@ -62,7 +64,7 @@ This will clone the WCS repository to your machine. You can access the WCS direc
 
 ## Initiating the server
 
-The server CLI is initiated by going to the `\server` directory in your terminal, and running the following command:
+The server CLI is initiated by going to the `server` directory of the cloned repository in your terminal, and running the following command:
 
 ```bat
 nodemon server.js
@@ -79,7 +81,7 @@ If everything went correctly, you should see this text:
 	PIN-code:
 ```
 
-Enter a PIN-code that's 4 to 8 digits, and hit Enter. The PIN-code will be immedtiately encrypted using the AES 256 bit encryption algorithm and the PIN-code hash will be written to the `\server\root\dat\key.hash` file.
+Enter a PIN-code that's 4 to 8 digits, and hit Enter. The PIN-code will be immedtiately encrypted using the AES 256 bit encryption algorithm and the PIN-code hash will be written to the `server\root\dat\key.hash` file.
 
 After providing a valid PIN-code and hitting Enter, you should see this text:
 
@@ -97,7 +99,7 @@ After providing a valid port and hitting Enter, you should see this text (where 
 	WCS is running at the following address:
 	http://<your_ip>:<your_port>
 	
-	Press ctrl+c any time to shut the server down.
+	Press ^C any time to shut the server down.
 ```
 
 To see if the server actually works, copy the address from the terminal and paste in your browser to visit it. If everything went fine, you should see this screen in your browser:
@@ -140,7 +142,7 @@ If its value is set to `true`, it won't ask for a PIN-code and a port upon initi
 
 ## Adding new tasks
 
-There will be more tasks added upon each new release of WCS, but you can add your own too. The only way to add your own task is to simply create a batch file with your script. You can put the batch file in a new directory inside the `\batch` directory to make it appear as a separate category in the control panel. There are a few guidelines/rules on how to name a directory:
+There will be more tasks added upon each new release of WCS, but you can add your own too. The only way to add your own task is to simply create a batch file with your script. You can put the batch file in a new directory inside the `server\batch` directory to make it appear as a separate category in the control panel. There are a few guidelines/rules on how to name a directory:
 
  - Can consist of an unlimited amount of characters
  - Can start with and contain any alphanumerical character
@@ -148,7 +150,7 @@ There will be more tasks added upon each new release of WCS, but you can add you
  - Use a dash (`-`) for spaces (whitespace characters will be ignored)
  - Text case will be ignored, the server will make every first character of a word (words are separated with a dash) upper case and all other characters lower case
 
-Create a new batch file inside the `\batch\<your_directory>` directory, write the script you want to be executed, and save the file. A few guidelines/rules on how to name a batch file:
+Create a new batch file inside the `server\batch\<your_directory>` directory, write the script you want to be executed, and save the file. A few guidelines/rules on how to name a batch file:
 
  - Can consist of an unlimited amount of characters
  - Can start with and contain any alphanumerical character
@@ -169,11 +171,11 @@ Saved batch file in explorer:
 
 That's it.
 
-The button will appear in the web client under the category what you named the directory the batch file is in to in the `\batch` directory.
+The button will appear in the web client under the category what you named the directory the batch file is in to in the `server\batch` directory.
 
 ## Compiling the Sass code
 
-WCS uses Sass. The actual file itself is written in SCSS though, not in SASS, due to syntax preferences. The SCSS file is located in the `\server\client\sass` directory. If you go to the project's root directory in your terminal, you can run this command to compile the SCSS code once:
+WCS uses Sass. The actual file itself is written in SCSS though, not in SASS, due to syntax preferences. The SCSS file is located in the `server\client\sass` directory. If you go to the project's root directory in your terminal, you can run this command to compile the SCSS code once:
 
 ```bat
 sass .\server\client\sass\stylesheet.scss .\public\client\css\stylesheet.css

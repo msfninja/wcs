@@ -1,31 +1,75 @@
 @use 'sass:math';
 
-@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css');
+@import url('/client/media/ico/bootstrap-icons/font/bootstrap-icons.css');
 
 @font-face {
 	font-family: 'FreeSans';
-	src: url('/client/media/fonts/FreeSans.otf');
+	src: url('/client/media/font/FreeSans.otf');
 }
 
 $font-body: 'FreeSans', sans-serif;
 $font-heading: 'FreeSans', sans-serif;
 
-$mobile-screen: 950px;
+$border-radius: .875rem;
+
+$mobile-screen: 900px;
 
 @mixin input() {
 	border: none;
-	border-radius: .875rem;
+	border-radius: $border-radius;
 	display: inline;
 	font-size: 16pt;
 	padding: 15px;
 	margin: 0;
 	background: #9996;
 	color: #ffff;
+	outline: none;
 
 	&:focus {
-		outline: none;
 		background: #999a;
 	}
+}
+
+@mixin cross-p($prop,$value) {
+	#{$prop}: #{$value};
+	-o-#{$prop}: #{$value};
+	-xv-#{$prop}: #{$value};
+	-ah-#{$prop}: #{$value};
+	-hp-#{$prop}: #{$value};
+	-ro-#{$prop}: #{$value};
+	-tc-#{$prop}: #{$value};
+	-ms-#{$prop}: #{$value};
+	-mso-#{$prop}: #{$value};
+	-rim-#{$prop}: #{$value};
+	-moz-#{$prop}: #{$value};
+	-wap-#{$prop}: #{$value};
+	-atsc-#{$prop}: #{$value};
+	-konq-#{$prop}: #{$value};
+	-khtml-#{$prop}: #{$value};
+	-apple-#{$prop}: #{$value};
+	-webkit-#{$prop}: #{$value};
+	-prince-#{$prop}: #{$value};
+}
+
+@mixin cross-v($prop,$value) {
+	#{$prop}: #{$value};
+	#{$prop}: -o-#{$value};
+	#{$prop}: -xv-#{$value};
+	#{$prop}: -ah-#{$value};
+	#{$prop}: -hp-#{$value};
+	#{$prop}: -ro-#{$value};
+	#{$prop}: -tc-#{$value};
+	#{$prop}: -ms-#{$value};
+	#{$prop}: -mso-#{$value};
+	#{$prop}: -rim-#{$value};
+	#{$prop}: -moz-#{$value};
+	#{$prop}: -wap-#{$value};
+	#{$prop}: -atsc-#{$value};
+	#{$prop}: -konq-#{$value};
+	#{$prop}: -khtml-#{$value};
+	#{$prop}: -apple-#{$value};
+	#{$prop}: -webkit-#{$value};
+	#{$prop}: -prince-#{$value};
 }
 
 html {
@@ -35,12 +79,17 @@ html {
 		margin: 0;
 
 		#cnt {
-			font: normal 16pt $font-body;
-			background: #32445eff;
+			font: normal normal 400 16pt/normal $font-body;
+			background: #23bf;
 			color: #ffff;
 
 			* {
-				transition: ease 150ms;
+				@include cross-p('appearance','none');
+				@include cross-p('user-select','none');
+
+				-webkit-touch-callout: none;
+
+				transition: all 150ms cubic-bezier(.25,.1,.25,1) 0s;
 			}
 
 			.nowrap {
@@ -51,7 +100,7 @@ html {
 				$j: (7 - $i) * 12;
 
 				.h#{$i} {
-					font: normal #{$j}pt $font-heading;
+					font: normal normal 400 #{$j}pt/normal $font-heading;
 				}
 			}
 
@@ -89,6 +138,13 @@ html {
 				align-items: center;
 			}
 
+			.row-between-start {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: flex-start;
+			}
+
 			.column-around {
 				display: flex;
 				flex-direction: column;
@@ -108,6 +164,15 @@ html {
 				flex-direction: column;
 				justify-content: space-around;
 				align-items: center;
+			}
+
+			.scrollbox-h {
+				display: flex;
+				flex-direction: row;
+				justify-content: left;
+				align-items: center;
+				width: 100%;
+				overflow-x: auto;
 			}
 
 			.desktop {
@@ -160,22 +225,58 @@ html {
 				cursor: pointer;
 			}
 
-			#msg {
+			#notif {
 				position: fixed;
 				top: 0;
 				right: 0;
 				left: 0;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
 				padding: 10px;
-				transform: translateY(-150%);
-			}
+				transition: all 250ms cubic-bezier(.25,.1,.25,1) 0ms !important;
+				transform: translate(0,-100%);
+				z-index: 9000;
 
-			#msg-cnt {
-				border-radius: 1rem;
-				min-width: 500px;
-				padding: 10px;
-				background: #54667fff;
-				color: #ffff;
-				box-shadow: 0 0 10px #0003;
+				#n-cnt {
+					border-radius: $border-radius;
+					position: relative;
+					display: inline-block;
+					width: 500px;
+					padding: 10px;
+					background: #66af;
+					color: #ffff;
+					box-shadow: 0 3px 5px 2px #0003;
+					
+					* {
+						transition: none;
+					}
+
+					&:hover {
+						max-height: none;
+						background: #67df;
+					}
+
+					&:hover #n-close {
+						opacity: 1;
+					}
+
+					#n-title {
+						font: normal small-caps 900 12pt/normal 'FreeSans', sans-serif;
+						text-transform: lowercase;
+					}
+
+					#n-close {
+						opacity: 0;
+						transition: all 250ms cubic-bezier(.25,.1,.25,1) 0ms !important;
+						cursor: pointer;
+					}
+
+					#n-body {
+						font: normal normal 400 14pt/normal 'FreeSans', sans-serif;
+					}
+				}
 			}
 		} // #cnt
 	} // body

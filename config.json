@@ -2,7 +2,7 @@
     "app": {
         "name": "WCS",
         "name_long": "Windows Control Server",
-        "version": "0.0.0-alpha"
+        "version": "0.0.0"
     },
     "port": null,
     "sec": {

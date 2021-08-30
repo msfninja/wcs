@@ -143,7 +143,7 @@ const
 		gettree(p).forEach(e => { if (fs.lstatSync(path.join(p,e)).isDirectory()) arr.push(e); });
 		return arr;
 	},
-	execute = (a,b) => {
+	execute = (a,b,c) => {
 		var obj = getcom(`${dir}/server/batch`).find(e => e.name === a);
 		if (obj) {
 			var str = obj.path
@@ -160,30 +160,31 @@ const gethtml = () => {
 			<section>
 				<div class="h4">${formatcat(cat)}</div>
 				<div class="ws50"></div>
-				<div class="row-around">
+				<div class="scrollbox-h">
 		`;
 		getcom(`${dir}/server/batch`).forEach(com => {
 			if (cat === 'file-system' && com.path.split(path.sep)[com.path.split(path.sep).length - 2] === 'file-system') {
 				html += `
 					<script type="application/ecmascript" defer="defer">
-						const f${com.name} = () => {
+						const fs${com.name} = () => {
 							var c = prompt('${com.name}: Enter a pathname');
-							if (c) ajax(\`/{token}/${com.name}/\${encodeURIComponent(c)}\`);
+							if (c) {
+								ajax(\`/{token}/${com.name}/\${encodeURIComponent(c)}\`);
+								notif(true,'Command','${com.name} command sent');
+							}
 						};
 					</script>
-					<div title="Send ${com.name} command to your PC" onclick="f${com.name}();" class="btn">
+					<div title="Send ${com.name} command to your PC" onclick="fs${com.name}();" class="btn">
 						<div>${com.name}</div>
 					</div>
 				`;
 			}
-			else {
-				if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === cat) {
-					html += `
-						<div title="Send ${com.name} command to your PC" onclick="ajax('/{token}/${com.name}'); msg('${formatcom(com.name)} command sent');" class="btn">
-							<div>${formatcom(com.name)}</div>
-						</div>
-					`;
-				}
+			else if (com.path.split(path.sep)[com.path.split(path.sep).length - 2] === cat) {
+				html += `
+					<div title="Send ${com.name} command to your PC" onclick="ajax('/{token}/${com.name}'); notif(true,'Command','${formatcom(com.name)} command sent');" class="btn">
+						<div>${formatcom(com.name)}</div>
+					</div>
+				`;
 			}
 		});
 		html += `

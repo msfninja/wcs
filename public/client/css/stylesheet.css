@@ -1,7 +1,7 @@
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+@import url("/client/media/ico/bootstrap-icons/font/bootstrap-icons.css");
 @font-face {
   font-family: "FreeSans";
-  src: url("/client/media/fonts/FreeSans.otf");
+  src: url("/client/media/font/FreeSans.otf");
 }
 html {
   scroll-behavior: smooth;
@@ -10,30 +10,70 @@ html body {
   margin: 0;
 }
 html body #cnt {
-  font: normal 16pt "FreeSans", sans-serif;
-  background: #32445eff;
+  font: normal normal 400 16pt/normal "FreeSans", sans-serif;
+  background: #23bf;
   color: #ffff;
 }
 html body #cnt * {
-  transition: ease 150ms;
+  appearance: none;
+  -o-appearance: none;
+  -xv-appearance: none;
+  -ah-appearance: none;
+  -hp-appearance: none;
+  -ro-appearance: none;
+  -tc-appearance: none;
+  -ms-appearance: none;
+  -mso-appearance: none;
+  -rim-appearance: none;
+  -moz-appearance: none;
+  -wap-appearance: none;
+  -atsc-appearance: none;
+  -konq-appearance: none;
+  -khtml-appearance: none;
+  -apple-appearance: none;
+  -webkit-appearance: none;
+  -prince-appearance: none;
+  user-select: none;
+  -o-user-select: none;
+  -xv-user-select: none;
+  -ah-user-select: none;
+  -hp-user-select: none;
+  -ro-user-select: none;
+  -tc-user-select: none;
+  -ms-user-select: none;
+  -mso-user-select: none;
+  -rim-user-select: none;
+  -moz-user-select: none;
+  -wap-user-select: none;
+  -atsc-user-select: none;
+  -konq-user-select: none;
+  -khtml-user-select: none;
+  -apple-user-select: none;
+  -webkit-user-select: none;
+  -prince-user-select: none;
+  -webkit-touch-callout: none;
+  transition: all 150ms cubic-bezier(0.25, 0.1, 0.25, 1) 0s;
+}
+html body #cnt .nowrap {
+  white-space: nowrap;
 }
 html body #cnt .h1 {
-  font: normal 72pt "FreeSans", sans-serif;
+  font: normal normal 400 72pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .h2 {
-  font: normal 60pt "FreeSans", sans-serif;
+  font: normal normal 400 60pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .h3 {
-  font: normal 48pt "FreeSans", sans-serif;
+  font: normal normal 400 48pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .h4 {
-  font: normal 36pt "FreeSans", sans-serif;
+  font: normal normal 400 36pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .h5 {
-  font: normal 24pt "FreeSans", sans-serif;
+  font: normal normal 400 24pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .h6 {
-  font: normal 12pt "FreeSans", sans-serif;
+  font: normal normal 400 12pt/normal "FreeSans", sans-serif;
 }
 html body #cnt .ws5 {
   height: 5px;
@@ -647,6 +687,12 @@ html body #cnt .row-around {
   justify-content: space-around;
   align-items: center;
 }
+html body #cnt .row-between-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 html body #cnt .column-around {
   display: flex;
   flex-direction: column;
@@ -664,6 +710,14 @@ html body #cnt .flexbox-i-around {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+html body #cnt .scrollbox-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
 }
 html body #cnt .desktop {
   display: initial;
@@ -693,11 +747,12 @@ html body #cnt .btn {
   margin: 0;
   background: #9996;
   color: #ffff;
+  outline: none;
   cursor: pointer;
   min-width: 125px;
+  margin: 10px;
 }
 html body #cnt .btn:focus {
-  outline: none;
   background: #999a;
 }
 html body #cnt .btn:hover {
@@ -715,32 +770,62 @@ html body #cnt input, html body #cnt button {
   margin: 0;
   background: #9996;
   color: #ffff;
+  outline: none;
 }
 html body #cnt input:focus, html body #cnt button:focus {
-  outline: none;
   background: #999a;
 }
 html body #cnt button {
   cursor: pointer;
 }
-html body #cnt #msg {
+html body #cnt #notif {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  transform: translateY(-150%);
+  transition: all 250ms cubic-bezier(0.25, 0.1, 0.25, 1) 0ms !important;
+  transform: translate(0, -100%);
+  z-index: 9000;
 }
-html body #cnt #msg-cnt {
-  border-radius: 1rem;
-  min-width: 500px;
+html body #cnt #notif #n-cnt {
+  border-radius: 0.875rem;
+  position: relative;
+  display: inline-block;
+  width: 500px;
   padding: 10px;
-  background: #54667fff;
+  background: #66af;
   color: #ffff;
-  box-shadow: 0 0 10px #0003;
+  box-shadow: 0 3px 5px 2px #0003;
+}
+html body #cnt #notif #n-cnt * {
+  transition: none;
+}
+html body #cnt #notif #n-cnt:hover {
+  max-height: none;
+  background: #67df;
+}
+html body #cnt #notif #n-cnt:hover #n-close {
+  opacity: 1;
+}
+html body #cnt #notif #n-cnt #n-title {
+  font: normal small-caps 900 12pt/normal "FreeSans", sans-serif;
+  text-transform: lowercase;
+}
+html body #cnt #notif #n-cnt #n-close {
+  opacity: 0;
+  transition: all 250ms cubic-bezier(0.25, 0.1, 0.25, 1) 0ms !important;
+  cursor: pointer;
+}
+html body #cnt #notif #n-cnt #n-body {
+  font: normal normal 400 14pt/normal "FreeSans", sans-serif;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 900px) {
   html body #cnt .fws5 {
     width: 5px;
   }

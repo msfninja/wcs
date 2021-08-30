@@ -1,0 +1,1 @@
+npm i -g nodemon && npm i path && npm i url && npm i fs && npm i querystring && npm i ip && npm i child_process && npm i readline && npm i crypto && npm i uuid && npm i colors
